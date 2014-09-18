@@ -27,7 +27,7 @@
 #'   
 #' @export
 dyLegend <- function(dygraph,
-                     show = c("auto", "always", "onmouseover", "never"),
+                     show = c("auto", "always", "onmouseover", "follow", "never"),
                      width = 250,
                      showZeroValues = TRUE,
                      labelsDiv = NULL,
@@ -39,6 +39,17 @@ dyLegend <- function(dygraph,
   if (legend$legend == "never") {
     legend$legend <- NULL
     legend$showLabelsOnHighlight <- FALSE
+  }
+  if (legend$legend == "follow") {
+    legend$legend <- NULL
+    legend$legendFollow <- TRUE
+    legend$labelsDivStyles=list(
+      pointerEvents='none', # let mouse events fall through the legend div
+      # borderRadius='10px',
+      # boxShadow='4px 4px 4px #888',
+      # background='none',
+      backgroundColor='rgba(255, 255, 255, 0.5)'
+    )
   }
   legend$labelsDivWidth <- width
   legend$labelsShowZeroValues <- showZeroValues
